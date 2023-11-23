@@ -1,0 +1,156 @@
+<MyLayout>
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+        spacing: 10
+        # size_hint: 1.0, 0.5
+        Label:
+            text: root.connect_status
+            size_hint: 1.0, 0.25
+            font_size: "25sp"
+            color: [1, 1, 1]
+            # bold: True
+            # background_color: root.back_color_status
+            canvas.before:
+                Color:
+                    rgba: root.back_color_status
+                    # rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [20]
+        # size: root.width, root.height
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1.0, 0.4
+            # padding: 10
+            # spacing: 10
+            Label:
+                text: 'Вкл/Откл котла'
+                size_hint: 1.0, 1.0
+                font_size: "25sp"
+            Switch:
+                active: root.CHstatus_Switch
+                font_size: 32
+                size_hint: 0.5, 1.0
+                on_active: root.CHstatus_Set(self, self.active)
+        BoxLayout:
+            # size: root.width, root.height
+            Label:
+                text: ''
+                size_hint: 0.1, 1.0
+            AnchorLayout:
+                canvas.before:
+                    Color:
+                        # rgba: root.bar_color + [0.9]
+                        rgba: [0.89, 0.19, 0.66, 0.15]
+                    Line:
+                        width: root.bar_width
+                        ellipse: (self.x, self.y-250, self.width, self.height+150, -90, 90)
+                canvas.after:
+                    Color:
+                        rgba: root.bar_color
+                    Line:
+                        width: root.bar_width
+                        # (x, y, width, height, angle_start, angle_end, segments):
+                        # ellipse: (self.x, self.y, self.width, self.height, -90, -90+root.set_value*3.6)
+                        ellipse: (self.x, self.y-250, self.width, self.height+150, -90, -90+root.set_value*3.6)
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint: 0.2, 1.0
+                    # padding: 30
+                    # size: root.width, root.height
+                    Label:
+                        text: ''
+                    Label:
+                        text: ''
+                    Label:
+                        text: ''
+                    Image:
+                        source: 'Flame.png'
+                        size_hint_x: 1.08
+                        size_hint_y: 3.4
+                        # width: 100
+                        # allow_stretch: True
+                        # size: 100, 100
+                        # opacity: root.flame_status
+                        canvas.after:
+                            Color:
+                                rgba: root.flame_status
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [50]
+                    Label:
+                        text: ''
+                    Label:
+                        text: root.text
+                        font_size: "40sp"
+                        # pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        # halign: "center"
+                        color: root.bar_color
+
+
+            Label:
+                text: ''
+                size_hint: 0.1, 1.0
+        BoxLayout:
+            # size_hint: 0.5, 0.5
+            Button:
+                text: "-"
+                font_size: "60sp"
+                size_hint: 1.0, 0.5
+                on_press: root.press_CHTSet_minus()
+            Label:
+                text: root.text_CHTSet
+                font_size: "40sp"
+                size_hint: 1.0, 0.5
+            Button:
+                text: "+"
+                font_size: "60sp"
+                size_hint: 1.0, 0.5
+                on_press: root.press_CHTSet_plus()
+        Button:
+            text: root.CHTSet_text
+            font_size: "25sp"
+            size_hint: 1.0, 0.5
+            halign: 'center'
+            background_color: root.back_color_CHTSet
+            on_press: root.press_CHTSet()
+        BoxLayout:
+            size_hint: 1.0, 0.5
+            Label:
+                text: 'Давление\nв системе'
+                font_size: "25sp"
+                size_hint: 1.0, 1.0
+                halign: 'center'
+                multiline: True
+            # Label:
+            #     text: ''
+            #     size_hint: 0.3, 1.0
+            AnchorLayout:
+                size_hint: 0.7, 1.0
+                canvas.before:
+                    Color:
+                        rgba: [0.01, 0.75, 0.98, 0.3]
+                    Line:
+                        width: 15
+                        ellipse: (self.x, self.y-70, self.width, self.height+50, -90, 90)
+                canvas.after:
+                    Color:
+                        rgba: [0.01, 0.75, 0.98, 1]
+                    Line:
+                        width: 15
+                        ellipse: (self.x, self.y-70, self.width, self.height+50, -90, -90+20*3.6)
+                BoxLayout:
+                    orientation: "vertical"
+                    Label:
+                        text: ''
+                        size_hint: 1.0, 0.3
+                    Label:
+                        text: '1,5 атм'
+                        font_size: "25sp"
+                        # size_hint: 0.1, 0.5
+            Label:
+                text: ''
+                size_hint: 0.1, 1.0
